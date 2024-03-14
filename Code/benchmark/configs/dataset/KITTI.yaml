@@ -1,0 +1,14 @@
+name: "KITTI"
+data_path: "Datasets\\KITTI\\Data\\dataset"
+result_path: "Datasets\\KITTI\\Result"
+test_sequences: "splits\\test_kitti.txt"
+distance_between_pairs: 10
+time_between_pairs: 100
+voxel_downsample_size: 0.3
+rre_threshold_degrees: 5
+rte_threshold_meters: 2
+
+test_pairs: "test_pairs.txt"
+corrected_transformation: "test_transformations.txt"
+
+

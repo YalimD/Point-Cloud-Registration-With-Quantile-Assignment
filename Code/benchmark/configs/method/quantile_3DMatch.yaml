@@ -1,0 +1,46 @@
+defaults:
+  - quantile_default
+
+downsampler: "voxel"
+downsampler_args:
+  - 0.05
+
+calculate_normals: True
+normal_knn_radius: 0.1
+normal_knn_max_nn: 30
+
+use_fpfh: True
+use_lfsh: False
+feature_nn_radius: 0.1
+feature_nn_count: 30
+
+# False is FGR
+use_quantile_matching: True
+matching_method: "hungarian_cost"
+affinity_penalty_coefficient:  1.0
+save_affinity: False
+alpha: 0.3
+
+tuple_test: False  # FGR based tuple test, not aggressive
+tuple_test_maximum_pair_count: 1000
+tuple_test_tau: 0.9
+tuple_test_seed: 0
+
+transformation_calculator: "fgr"
+refine_transformation_icp: True
+icp_distance_threshold: 0.01
+
+tuple_normal_alignment_check: False
+tuple_normal_alignment_threshold_degrees: 5
+
+visualize: False
+visualize_path: "."
+parameter_dump_file: ".\\parameters.txt"
+
+gt_rot: None
+gt_trans: None
+gt_cor: None
+
+projection_error_threshold_meters: 0.2
+rotation_threshold_degrees:  5.0
+translation_threshold_meters: 2.0

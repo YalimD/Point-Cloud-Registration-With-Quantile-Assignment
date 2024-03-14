@@ -1,0 +1,10 @@
+name: "3DMatch"
+data_path: "Datasets\\3DMatch\\Data"
+result_path: "Datasets\\3DMatch\\Results"
+registration:
+  neighbour_distance: 0.075
+  overlap_ratio_threshold: 0.3
+  rmse_distance_threshold: 0.2
+fmr:
+  taf_1: 0.1
+  taf_2: 0.05

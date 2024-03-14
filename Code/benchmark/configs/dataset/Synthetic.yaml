@@ -1,0 +1,21 @@
+name: "Synthetic"
+data_path: "Datasets\\Synthetic\\Data"
+result_path: "Datasets\\Synthetic\\Results"
+noise:
+  sigma: 0.0025
+  ratio: 3
+overlap: # In average
+  angel: 0.73
+  buddha: 0.85
+  bunny: 0.68
+  dragon: 0.77
+  horse: 0.75
+transformation:
+  rotation_degrees:
+    - 60
+    - 90
+    - 180
+  translation:
+    - 0.5
+    - 0.5
+    - 0.5

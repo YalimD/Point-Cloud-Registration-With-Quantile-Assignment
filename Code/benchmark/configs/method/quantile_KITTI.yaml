@@ -1,0 +1,12 @@
+defaults:
+  - quantile_default
+
+# I downsampled the original model with 0.3 beforehand
+downsampler: "voxel"
+downsampler_args:
+  - 1
+
+# Each pair is at least 10 meters apart, considering the sensor has 120 meter range,
+# expected overlap is around 90
+alpha: 0.7
+visualize: True

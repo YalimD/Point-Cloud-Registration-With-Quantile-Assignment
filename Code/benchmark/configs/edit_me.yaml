@@ -1,0 +1,3 @@
+defaults:
+  - method: quantile_Synthetic
+  - dataset: Synthetic
