@@ -25,8 +25,8 @@ To run the pipeline on example points clouds from Open3D (Stanford Bunny and Arm
 
 Example results for horizontally split Stanford Bunny:
 
-<img alt="Initial Bunny Halves" src="Resources/bunny_rotated.png" width="480" height="320">
-<img alt="Registered Bunny Halves" src="Resources/bunny_registered.png" width="320" height="320">
+![Initial Bunny Halves](Resources/bunny_rotated.png)
+![Registered Bunny Halves](Resources/bunny_registered.png)
 
 # Dataset Tests
 
@@ -62,9 +62,9 @@ Go to https://3dmatch.cs.princeton.edu/#geometric-registration-benchmark and dow
 
 Export them to desired location and edit the ```Code\benchmark\configs\dataset\3DMatch.yaml``` accordingly.
 
-<img alt="3DMatchSource" src="Resources/source_3dm.png" width="180" height="180">
-<img alt="3DMatchTarget" src="Resources/target_3dm.png" width="180" height="180">
-<img alt="3DMatchSource" src="Resources/registered_3dm.png" width="180" height="180">
+![3DMatchSource](Resources/source_3dm.png)
+![3DMatchTarget](Resources/target_3dm.png)
+![3DMatchResult](Resources/registered_3dm.png)
 
 ![3DMatch](Resources/threeDMatch_comparison.png)
 
