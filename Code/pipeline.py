@@ -3,7 +3,6 @@ from omegaconf import DictConfig
 
 from dataclasses import dataclass, field
 
-import Code.experimental.LFSH
 from Code.quantile_assignment import *
 
 
@@ -114,14 +113,12 @@ def quantile_registration_pipeline(parameters: PipelineParameters):
         source_indices = np.arange(np.asarray(source_cloud.points).shape[0])
         source_diameter = np.linalg.norm(source_cloud.get_max_bound() - source_cloud.get_min_bound())
         source_sup_radius = source_diameter * 0.13
-        source_features = Code.experimental.LFSH.LFSH_compute(source_cloud, source_indices, source_sup_radius, 30)
-        # source_features = LFSH_compute(source_cloud, source_indices, source_sup_radius, 30)
+        source_features = calculate_lfsh(source_cloud, source_indices, source_sup_radius, 30)
 
         target_indices = np.arange(np.asarray(target_cloud.points).shape[0])
         target_diameter = np.linalg.norm(target_cloud.get_max_bound() - target_cloud.get_min_bound())
         target_sup_radius = target_diameter * 0.13
-        target_features = Code.experimental.LFSH.LFSH_compute(target_cloud, target_indices, target_sup_radius, 30)
-        # target_features = LFSH_compute(target_cloud, target_indices, target_sup_radius, 30)
+        target_features = calculate_lfsh(target_cloud, target_indices, target_sup_radius, 30)
 
     else:
         source_features = calculate_cloud_curvatures(source_cloud,

@@ -741,8 +741,8 @@ class AppWindow:
         w.set_on_menu_item_activated(AppWindow.MENU_ABOUT, self._on_menu_about)
         # ----
 
-        self.load("..\\..\\Data\\Dummy\\bunny\\bunny.ply", 0)
-        self.load("..\\..\\Data\\Dummy\\bunny\\bunny.ply", 1)
+        self.load("..\\..\\Data\\Synthetic\\bunny\\bunny.ply", 0)
+        self.load("..\\..\\Data\\Synthetic\\bunny\\bunny.ply", 1)
 
         self._apply_settings()
 
@@ -939,6 +939,7 @@ def main():
 
     w = AppWindow(1024, 768)
 
+    import sys
     if len(sys.argv) > 1:
         path = sys.argv[1]
         if os.path.exists(path):

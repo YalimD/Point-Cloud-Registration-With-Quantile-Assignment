@@ -1,12 +1,9 @@
-import copy
-import os
 import numpy as np
 import open3d
-import time
-import utils
 
 import Code.pipeline as pipeline
 import Code.quantile_assignment as qa
+
 
 def test_default_bunny():
     source_cloud_path = open3d.data.BunnyMesh().path
@@ -97,7 +94,6 @@ def test_default_armadillo():
     transformation, *_ = pipeline.quantile_registration_pipeline(pipelineParameters)
 
     print(f"Resulting transformation is {transformation}")
-
 
 
 if __name__ == "__main__":
