@@ -4,6 +4,68 @@ import numpy as np
 import open3d
 from open3d import geometry
 
+import sys
+
+def calculate_point_curvature(fix_pos: np.ndarray, fix_normal: np.ndarray,
+                              query_pos: np.ndarray, query_normal: np.ndarray) -> float:
+    fix_unit = fix_normal / np.linalg.norm(fix_normal)
+    query_unit = query_normal / np.linalg.norm(query_normal)
+
+    p_q = query_pos - fix_pos
+    p_q_length = np.linalg.norm(p_q)
+
+    p_q = p_q / p_q_length
+
+    sin_beta = np.linalg.norm(np.cross(fix_unit, query_unit))
+
+    # Our Paper
+    # cos_alpha = np.dot(-fix_unit, p_q)
+    # return sin_beta / (p_q_length * cos_alpha)
+
+    # Paper: "Curvature Estimation of 3D Point Cloud Surfaces Through the Fitting of Normal Section Curvatures"
+    # Getting sin_alpha 0 is less common as the normal of a point is not expected to
+    # be towards opposite of the connecting line unless the point is noisy
+    sin_alpha = np.linalg.norm(np.cross(-fix_unit, p_q))
+    sin_alpha = sys.float_info.epsilon if sin_alpha == 0.0 else sin_alpha
+    return -sin_beta / (p_q_length * sin_alpha)
+
+
+def calculate_cloud_curvatures(point_cloud: geometry.PointCloud,
+                               nearest_neighbour_radius: float,
+                               nearest_neighbour_count: int):
+    # As knn also gives the point itself as a neighbor, k is at least 2
+    nearest_neighbour_count = max(nearest_neighbour_count, 2)
+
+    """Calculates the curvature for each point according to sample of the patch """
+    points = np.asarray(point_cloud.points)
+    normals = np.asarray(point_cloud.normals)
+    curvatures = np.zeros((normals.shape[0], 1))
+
+    # Each point samples their knn and averages the curvature
+    kd_tree = geometry.KDTreeFlann(point_cloud)
+
+    for p, point in enumerate(points):
+        [neighbor_count, neighbor_indices, _] = kd_tree.search_hybrid_vector_3d(point,
+                                                                                nearest_neighbour_radius,
+                                                                                nearest_neighbour_count)
+        tot_curvature = 0
+
+        # TODO: Cannot be parallelized using Numba due to function calls
+        for n in range(0, neighbor_count):
+            index = neighbor_indices[n]
+            if index != p:
+                neighbor_pos = points[index]
+                neighbor_normal = normals[index]
+
+                if not (neighbor_pos == points[p]).all():
+                    tot_curvature += calculate_point_curvature(neighbor_pos, neighbor_normal,
+                                                               points[p], normals[p])
+
+        # Calculate curvature
+        if neighbor_count > 2:
+            curvatures[p][0] = tot_curvature / (neighbor_count - 1)
+
+    return remove_nan_values(curvatures)
 
 def calculate_fpfh(point_cloud: geometry.PointCloud,
                    nearest_neighbour_radius: float,
