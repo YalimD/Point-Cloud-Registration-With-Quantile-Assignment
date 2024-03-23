@@ -62,6 +62,10 @@ Go to https://3dmatch.cs.princeton.edu/#geometric-registration-benchmark and dow
 
 Export them to desired location and edit the ```Code\benchmark\configs\dataset\3DMatch.yaml``` accordingly.
 
+<img alt="3DMatchSource" src="Resources/source_3dm.png" width="180" height="180">
+<img alt="3DMatchTarget" src="Resources/target_3dm.png" width="180" height="180">
+<img alt="3DMatchSource" src="Resources/registered_3dm.png" width="180" height="180">
+
 ![3DMatch](Resources/threeDMatch_comparison.png)
 
 # KITTI Tests
